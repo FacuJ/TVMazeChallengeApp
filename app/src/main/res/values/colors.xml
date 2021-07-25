@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="blue_200">#5C5FDA</color>
+    <color name="blue_500">#3E4095</color>
+    <color name="light_blue_200">#00AFEF</color>
+    <color name="light_blue_500">#0084B5</color>
+    <color name="light_blue_grey_500">#50646C</color>
+    <color name="red_200">#EA0000</color>
+    <color name="red_500">#C30000</color>
+    <color name="red_grey_500">#714646</color>
+    <color name="light_grey_200">#D1D1D1</color>
+    <color name="light_green_grey_500">#688869</color>
+    <color name="green_200">#3ADF41</color>
+    <color name="green_500">#4CAF50</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Palette -->
+    <color name="blue_liberty">#4861AD</color>
+    <color name="dark_cornflower_blue">#304273</color>
+
+    <color name="bone">#C5C2AA</color>
+    <color name="sage">#B5B192</color>
+
+    <color name="dark_electric_blue">#496A81</color>
+    <color name="charcoal_blue">#334B5B</color>
+
+    <color name="mellow_apricot">#FFC482</color>
+    <color name="yellow_orange">#FFA947</color>
+
+</resources>
