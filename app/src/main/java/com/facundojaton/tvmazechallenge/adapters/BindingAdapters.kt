@@ -10,10 +10,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.request.RequestOptions
 import com.facundojaton.tvmazechallenge.R
-import com.facundojaton.tvmazechallenge.SeriesListStatus
+import com.facundojaton.tvmazechallenge.RequestStatus
 import com.facundojaton.tvmazechallenge.model.Episode
 import com.facundojaton.tvmazechallenge.model.Series
-import com.facundojaton.tvmazechallenge.remote.APIConstants
 
 @BindingAdapter("seriesList")
 fun bindSeriesRecyclerView(
@@ -90,30 +89,30 @@ fun bindSeriesImage(imgView: ImageView, imgUrl: String?) {
 }
 
 @BindingAdapter("seriesApiStatus")
-fun bindStatus(progressBar: ProgressBar, status: SeriesListStatus?) {
+fun bindStatus(progressBar: ProgressBar, status: RequestStatus?) {
     when (status) {
-        SeriesListStatus.LOADING -> {
+        RequestStatus.LOADING -> {
             progressBar.visibility = View.VISIBLE
         }
-        SeriesListStatus.ERROR -> {
+        RequestStatus.ERROR -> {
             progressBar.visibility = View.GONE
         }
-        SeriesListStatus.DONE -> {
+        RequestStatus.DONE -> {
             progressBar.visibility = View.GONE
         }
     }
 }
 
 @BindingAdapter("refreshSeriesVisibility")
-fun bindStatus(button: Button, status: SeriesListStatus?) {
+fun bindStatus(button: Button, status: RequestStatus?) {
     when (status) {
-        SeriesListStatus.LOADING -> {
+        RequestStatus.LOADING -> {
             button.visibility = View.GONE
         }
-        SeriesListStatus.ERROR -> {
+        RequestStatus.ERROR -> {
             button.visibility = View.VISIBLE
         }
-        SeriesListStatus.DONE -> {
+        RequestStatus.DONE -> {
             button.visibility = View.GONE
         }
     }

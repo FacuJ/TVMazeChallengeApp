@@ -1,6 +1,6 @@
 package com.facundojaton.tvmazechallenge
 
-enum class SeriesListStatus {
+enum class RequestStatus {
         LOADING, ERROR, DONE
 }
 

@@ -12,7 +12,7 @@ class SeriesListAdapter : ListAdapter<
         Series,
         SeriesListAdapter.SeriesViewHolder>(DiffCallback) {
 
-    var onSeriesClicked: (seriesId: Long) -> Unit = { }
+    var onSeriesClicked: (series: Series) -> Unit = { }
     var waiting = false
 
     override fun onCreateViewHolder(
@@ -27,9 +27,7 @@ class SeriesListAdapter : ListAdapter<
         holder.bind(series)
 
         holder.binding.ivSeries.setOnClickListener {
-            if(!waiting) series.id?.let { id ->
-                onSeriesClicked(id)
-            }
+            if(!waiting) onSeriesClicked(series)
         }
     }
 

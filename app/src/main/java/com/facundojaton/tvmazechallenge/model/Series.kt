@@ -12,6 +12,7 @@ data class Series(
     val url: String?,
     val type: String?,
     val language: String?,
+    val schedule: Schedule,
     val genres: ArrayList<String>?,
     val summary: String?
 ) : Parcelable, Serializable

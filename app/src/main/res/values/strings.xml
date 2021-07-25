@@ -3,4 +3,8 @@
     <string name="refresh">Refresh</string>
     <string name="search_series_by_name">Search by name</string>
     <string name="error_fetching_series">Error fetching shows. Try again later</string>
+    <string name="type">Type</string>
+    <string name="empty_cast">Empty cast</string>
+    <string name="episodes">Episodes</string>
+    <string name="there_are_no_episodes">This series has no episodes yet</string>
 </resources>

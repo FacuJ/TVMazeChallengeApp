@@ -10,6 +10,8 @@ data class Episode(
     val name: String?,
     val number: Int?,
     val season: Int?,
-    val image: String?,
-    val summary: String?
+    val type: String?,
+    val url: String?,
+    val image: ImageResponse?,
+    val summary: String
 ) : Parcelable, Serializable

@@ -6,8 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.facundojaton.tvmazechallenge.SeriesListStatus
+import com.facundojaton.tvmazechallenge.RequestStatus
+import com.facundojaton.tvmazechallenge.model.Episode
 import com.facundojaton.tvmazechallenge.model.Series
+import com.facundojaton.tvmazechallenge.model.SeriesDetail
 import com.facundojaton.tvmazechallenge.model.SeriesResponse
 import com.facundojaton.tvmazechallenge.remote.APIConstants
 import com.facundojaton.tvmazechallenge.repository.SeriesRepository
@@ -22,13 +24,17 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
     val seriesList: LiveData<List<Series>>
         get() = _seriesList
 
-    private val _status = MutableLiveData<SeriesListStatus>()
-    val status: LiveData<SeriesListStatus>
+    private val _status = MutableLiveData<RequestStatus>()
+    val status: LiveData<RequestStatus>
         get() = _status
 
     private val _queryParams = MutableLiveData<HashMap<String, String>>()
     val queryParams: LiveData<HashMap<String, String>>
         get() = _queryParams
+
+    private val _selectedSeries = MutableLiveData<SeriesDetail>()
+    val selectedSeries: LiveData<SeriesDetail>
+        get() = _selectedSeries
 
     private var isLastPage: Boolean
     private var isScrolling: Boolean
@@ -49,9 +55,9 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
     }
 
     private fun getSeriesList() = viewModelScope.launch {
-        if (_status.value != SeriesListStatus.LOADING) {
+        if (_status.value != RequestStatus.LOADING) {
             try {
-                _status.value = SeriesListStatus.LOADING
+                _status.value = RequestStatus.LOADING
                 val seriesList = ArrayList<Series>()
                 queryParams.value?.let {
                     withContext(Dispatchers.IO) {
@@ -60,10 +66,10 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
                         seriesList[1].image
                     }
                 }
-                _status.value = SeriesListStatus.DONE
+                _status.value = RequestStatus.DONE
                 _seriesList.value = seriesList
             } catch (e: Exception) {
-                _status.value = SeriesListStatus.ERROR
+                _status.value = RequestStatus.ERROR
                 Log.e(SeriesListViewModel::class.java.simpleName, e.message.toString())
             }
         }
@@ -79,19 +85,6 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
             return filteredSeries
         }
 
-        fun getMovie(movieId: Long) {
-            coroutineScope.launch {
-                try {
-                    _status.value = SeriesListStatus.LOADING
-                    val movie = SeriesApi.retrofitService.getMovieDetails(header, movieId)
-                    _status.value = SeriesListStatus.DONE
-                    displayMovieDetails(movie)
-                } catch (e: Exception) {
-                    _status.value = SeriesListStatus.ERROR
-                    Log.e(SeriesListFragment::class.java.simpleName, e.message.toString())
-                }
-            }
-        }
     */
 
     fun getSeriesListOnSearch(name: String) {
@@ -102,7 +95,7 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
 
     private fun getSeriesListByName(name: String) = viewModelScope.launch {
         try {
-            _status.value = SeriesListStatus.LOADING
+            _status.value = RequestStatus.LOADING
             val seriesList = ArrayList<Series>()
             withContext(Dispatchers.IO) {
                 val response: List<SeriesResponse> = repository.getSeriesByName(name)
@@ -110,10 +103,10 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
                     seriesList.add(it.show)
                 }
             }
-            _status.value = SeriesListStatus.DONE
+            _status.value = RequestStatus.DONE
             _seriesList.value = seriesList
         } catch (e: Exception) {
-            _status.value = SeriesListStatus.ERROR
+            _status.value = RequestStatus.ERROR
             Log.e(SeriesListViewModel::class.java.simpleName, e.message.toString())
         }
     }
@@ -150,6 +143,27 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
 
     fun onScrollStateTrue() {
         isScrolling = true
+    }
+
+    fun selectSeries(series: Series) = viewModelScope.launch {
+        try {
+            _status.value = RequestStatus.LOADING
+            val episodes = ArrayList<Episode>()
+            withContext(Dispatchers.IO) {
+                val response = repository.getSeriesEpisodesById(series.id!!)
+                episodes.addAll(response)
+            }
+            _status.value = RequestStatus.DONE
+            val seriesDetail = SeriesDetail(series, episodes)
+            _selectedSeries.value = seriesDetail
+        } catch (e: Exception) {
+            _status.value = RequestStatus.ERROR
+            Log.e(SeriesListFragment::class.java.simpleName, e.message.toString())
+        }
+    }
+
+    fun navigateToDetailsFinished() {
+        _selectedSeries.value = null
     }
 
     /*fun sortSeries(property: MovieProperties = MovieProperties.POPULARITY_DESC) {
