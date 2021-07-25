@@ -26,8 +26,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic" />
-            <!--app:previewImageUrl="@{series.poster}"-->
+            tools:src="@tools:sample/backgrounds/scenic"
+            app:seriesImageUrl="@{series.image.medium}"/>
 
 
         <androidx.appcompat.widget.AppCompatTextView

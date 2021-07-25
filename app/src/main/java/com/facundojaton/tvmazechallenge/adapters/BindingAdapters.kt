@@ -76,6 +76,18 @@ fun bindEpisodeImage(imgView: ImageView, imgUrl: String?) {
         .into(imgView)
 }*/
 
+@BindingAdapter("seriesImageUrl")
+fun bindSeriesImage(imgView: ImageView, imgUrl: String?) {
+    val customUrl = GlideUrl(imgUrl)
+    Glide.with(imgView.context)
+        .load(customUrl)
+        .apply(
+            RequestOptions()
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_broken_image)
+        )
+        .into(imgView)
+}
 
 @BindingAdapter("seriesApiStatus")
 fun bindStatus(progressBar: ProgressBar, status: SeriesListStatus?) {
@@ -101,7 +113,7 @@ fun bindStatus(button: Button, status: SeriesListStatus?) {
         SeriesListStatus.ERROR -> {
             button.visibility = View.VISIBLE
         }
-        SeriesListStatus.DONE-> {
+        SeriesListStatus.DONE -> {
             button.visibility = View.GONE
         }
     }

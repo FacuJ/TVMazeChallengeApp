@@ -22,8 +22,6 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
     val seriesList: LiveData<List<Series>>
         get() = _seriesList
 
-    val navigateToSeriesDetails = MutableLiveData(false)
-
     private val _status = MutableLiveData<SeriesListStatus>()
     val status: LiveData<SeriesListStatus>
         get() = _status
@@ -32,22 +30,11 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
     val queryParams: LiveData<HashMap<String, String>>
         get() = _queryParams
 
-    //val header = mapOf(Pair(APIConstants.Headers.API_KEY, SessionController.apiKey))
-
     private var isLastPage: Boolean
     private var isScrolling: Boolean
     private var isLoading: Boolean
     private var page: Int
     private var searchPage: Int
-
-/*
-    private fun displaySeriesDetails(movieDetails: MovieDetails) {
-        navigateToMovieDetails.value = movieDetails
-    }
-
-    fun displaySeriesDetailsComplete() {
-        navigateToMovieDetails.value = null
-    }*/
 
 
     init {
@@ -70,6 +57,7 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
                     withContext(Dispatchers.IO) {
                         val response: List<Series> = repository.getSeries(it)
                         seriesList.addAll(response)
+                        seriesList[1].image
                     }
                 }
                 _status.value = SeriesListStatus.DONE

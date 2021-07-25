@@ -51,14 +51,6 @@ class SeriesListFragment : Fragment() {
             }
         }
 
-        seriesListViewModel.navigateToSeriesDetails.observe(viewLifecycleOwner, { movieDetails ->
-            /*if (movieDetails != null) {
-                this.findNavController()
-                    .navigate(SeriesListFragmentDirections.actionShowDetail(movieDetails))
-                seriesListViewModel.displayMovieDetailsComplete()
-            }*/
-        })
-
         seriesListViewModel.status.observe(viewLifecycleOwner, { status ->
             when (status) {
                 SeriesListStatus.ERROR -> {

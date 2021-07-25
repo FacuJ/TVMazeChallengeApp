@@ -8,6 +8,7 @@ import java.io.Serializable
 data class Series(
     val id: Long?,
     val name: String?,
+    val image: ImageResponse?,
     val url: String?,
     val type: String?,
     val language: String?,
