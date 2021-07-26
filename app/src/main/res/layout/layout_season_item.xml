@@ -14,7 +14,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#0F171E"
+        android:background="@color/dark_cornflower_blue"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -24,7 +24,7 @@
             android:layout_marginStart="4dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="4dp"
-            android:text="Season"
+            android:text="@{@string/season_formatted(season.number)}"
             android:textColor="#C4DFEF"
             android:textSize="16sp"
             tools:text="@string/season" />

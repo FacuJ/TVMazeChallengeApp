@@ -10,4 +10,7 @@
     <string name="null_season_error">A season value on Episodes array was null</string>
     <string name="season">Season</string>
     <string name="episode_name">Episode name</string>
+    <string name="tool_long_text">Really long text to try several textviews on items</string>
+    <string name="episodes_by_season">Episodes by season</string>
+    <string name="season_formatted">Season %1$d</string>
 </resources>

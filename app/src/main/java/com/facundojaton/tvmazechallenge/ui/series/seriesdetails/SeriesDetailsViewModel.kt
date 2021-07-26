@@ -33,6 +33,7 @@ class SeriesDetailsViewModel @ViewModelInject constructor(
 
     fun setSeries(selectedSeries: SeriesDetail) {
         _seriesDetail.value = selectedSeries
+
         var highestSeason = 1
         try {
             val lastSeasonEpisode =
@@ -43,12 +44,14 @@ class SeriesDetailsViewModel @ViewModelInject constructor(
         } catch (e: Exception) {
             Log.e(SeriesDetailsFragment::class.java.simpleName, "null_season_error")
         }
+
         val seasonList = ArrayList<Season>()
         for (number in 1..highestSeason){
             val episodesList = ArrayList(selectedSeries.episodes.filter { it.season == number })
             val season = Season(number, episodesList)
            seasonList.add(season)
         }
+
         _seasonsList.value = seasonList
     }
 

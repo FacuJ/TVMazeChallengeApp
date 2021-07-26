@@ -36,7 +36,7 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
     val selectedSeries: LiveData<SeriesDetail>
         get() = _selectedSeries
 
-    private var isLastPage: Boolean
+    var isSearching: Boolean = false
     private var isScrolling: Boolean
     private var isLoading: Boolean
     private var page: Int
@@ -44,7 +44,6 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
 
 
     init {
-        isLastPage = false
         isScrolling = false
         isLoading = false
         searchPage = 1
@@ -74,22 +73,16 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
         }
     }
 
-    /*
-        private fun getFilteredSeries(seriesList: List<Movie>): List<Movie> {
-            val filteredSeries = ArrayList<Movie>()
-            if (page > 1) _series.value?.let { filteredSeries.addAll(it) }
-            for (movie in seriesList) {
-                if (!movie.isAdult) filteredSeries.add(movie)
-            }
-            return filteredSeries
-        }
-
-    */
-
     fun getSeriesListOnSearch(name: String) {
         resetPages()
-        if (name.isNotBlank()) getSeriesListByName(name)
-        else queryParams.value?.let { getSeriesList() }
+        if (name.isNotBlank()) {
+            isSearching = true
+            getSeriesListByName(name)
+        }
+        else {
+            isSearching = false
+            queryParams.value?.let { getSeriesList() }
+        }
     }
 
     private fun getSeriesListByName(name: String) = viewModelScope.launch {
@@ -121,12 +114,11 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
         visibleItemCount: Int,
         totalItemCount: Int
     ) {
-        val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
         val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
         val isNotAtBeginning = firstVisibleItemPosition >= 0
         val shouldPaginate =
-            isNotLoadingAndNotLastPage && isAtLastItem &&
-                    isNotAtBeginning && isScrolling
+            !isLoading && isAtLastItem &&
+                    isNotAtBeginning && isScrolling && !isSearching
         if (shouldPaginate) {
             getMoreSeries()
             isScrolling = false
@@ -165,9 +157,4 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
         _selectedSeries.value = null
     }
 
-    /*fun sortSeries(property: MovieProperties = MovieProperties.POPULARITY_DESC) {
-        resetPages()
-        _queryParams.value?.set(APIConstants.QueryParams.SORT, property.value)
-        queryParams.value?.let { getSeriesList(it) }
-    }*/
 }
