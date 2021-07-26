@@ -36,6 +36,19 @@
         <argument
             android:name="selectedSeries"
             app:argType="com.facundojaton.tvmazechallenge.model.SeriesDetail" />
+       <action
+           android:id="@+id/action_showEpisode"
+           app:destination="@id/episodeFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/episodeFragment"
+        android:name="com.facundojaton.tvmazechallenge.ui.episodes.EpisodeFragment"
+        android:label="Episode details"
+        tools:layout="@layout/fragment_episode">
+        <argument
+            android:name="episode"
+            app:argType="com.facundojaton.tvmazechallenge.model.Episode" />
     </fragment>
 
 </navigation>

@@ -14,4 +14,6 @@ class SeriesRepository@Inject constructor(
     suspend fun getSeries(params: HashMap<String, String>): List<Series> = remote.getShowsByParams(params)
 
     suspend fun getSeriesEpisodesById(seriesId: Long) = remote.getShowEpisodesById(seriesId)
+
+    suspend fun getEpisodeById(episodeId: Long) = remote.getEpisodeById(episodeId)
 }

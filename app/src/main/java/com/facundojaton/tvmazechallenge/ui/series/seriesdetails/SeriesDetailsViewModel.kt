@@ -1,20 +1,21 @@
 package com.facundojaton.tvmazechallenge.ui.series.seriesdetails
 
-import android.app.Application
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.view.Window
-import android.view.WindowManager
-import androidx.hilt.Assisted
+import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.facundojaton.tvmazechallenge.R
 import com.facundojaton.tvmazechallenge.RequestStatus
+import com.facundojaton.tvmazechallenge.model.Episode
+import com.facundojaton.tvmazechallenge.model.Season
 import com.facundojaton.tvmazechallenge.model.SeriesDetail
 import com.facundojaton.tvmazechallenge.repository.SeriesRepository
+import java.lang.Exception
 
-class SeriesDetailsViewModel@ViewModelInject constructor(
-    private val repository: SeriesRepository) : ViewModel() {
+class SeriesDetailsViewModel @ViewModelInject constructor(
+    private val repository: SeriesRepository
+) : ViewModel() {
 
     var episodesListEmpty: Boolean = true
 
@@ -26,24 +27,32 @@ class SeriesDetailsViewModel@ViewModelInject constructor(
     val status: LiveData<RequestStatus>
         get() = _status
 
-    init {
-        checkEmptyFields()
-    }
+    private val _seasonsList = MutableLiveData<List<Season>>()
+    val seasonsList: LiveData<List<Season>>
+        get() = _seasonsList
 
     fun setSeries(selectedSeries: SeriesDetail) {
         _seriesDetail.value = selectedSeries
+        var highestSeason = 1
+        try {
+            val lastSeasonEpisode =
+                selectedSeries.episodes.maxByOrNull { episode ->
+                    episode.season!!
+                }
+            highestSeason = lastSeasonEpisode?.season!!
+        } catch (e: Exception) {
+            Log.e(SeriesDetailsFragment::class.java.simpleName, "null_season_error")
+        }
+        val seasonList = ArrayList<Season>()
+        for (number in 1..highestSeason){
+            val episodesList = ArrayList(selectedSeries.episodes.filter { it.season == number })
+            val season = Season(number, episodesList)
+           seasonList.add(season)
+        }
+        _seasonsList.value = seasonList
     }
 
-    private fun checkEmptyFields() {
-        if(_seriesDetail.value?.episodes?.isEmpty() == false) episodesListEmpty = false
+    fun checkEmptyFields() {
+        if (_seriesDetail.value?.episodes?.isEmpty() == false) episodesListEmpty = false
     }
-
-    /*val displayReleaseDate = Transformations.map(seriesDetail) {
-        app.applicationContext.getString(R.string.release_date) + ": " + it.releaseDate
-    }
-
-    val displayStatus = Transformations.map(seriesDetail) {
-        app.applicationContext.getString(R.string.status) + ": " + it.status
-    }*/
-
 }

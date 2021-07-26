@@ -12,6 +12,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.facundojaton.tvmazechallenge.R
 import com.facundojaton.tvmazechallenge.RequestStatus
 import com.facundojaton.tvmazechallenge.model.Episode
+import com.facundojaton.tvmazechallenge.model.Season
 import com.facundojaton.tvmazechallenge.model.Series
 
 @BindingAdapter("seriesList")
@@ -31,61 +32,27 @@ fun bindEpisodesRecyclerView(
     val adapter = episodesRecyclerView.adapter as EpisodesListAdapter
     adapter.submitList(data)
 }
-/*
+
+@BindingAdapter("seasonsList")
+fun bindSeasonsRecyclerView(
+    seasonsRecyclerView: RecyclerView,
+    data: List<Season>?
+) {
+    val adapter = seasonsRecyclerView.adapter as SeasonsListAdapter
+    adapter.submitList(data)
+}
+
 @BindingAdapter("imageUrl")
-fun bindImage(imgView: ImageView, imgUrl: String?) {
-    val customUrl = "${APIConstants.BASE_URL}images$imgUrl?size=${APIConstants.ImageQuality.W500}"
-    val headerURL = GlideUrl(customUrl) *//*{
-        mapOf(
-            Pair(
-                APIConstants.Headers.API_KEY,
-                SessionController.apiKey
-            )
-        )
-    }*//*
-    Glide.with(imgView.context)
-        .load(headerURL)
-        .apply(
-            RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image)
-        )
-        .into(imgView)
-}*/
-
-/*
-@BindingAdapter("episodeImageUrl")
-fun bindEpisodeImage(imgView: ImageView, imgUrl: String?) {
-    val customUrl = "${APIConstants.BASE_URL}images$imgUrl?size=${APIConstants.ImageQuality.W185}"
-    val headerURL = GlideUrl(customUrl) *//*{
-        mapOf(
-            Pair(
-                APIConstants.Headers.API_KEY,
-                SessionController.apiKey
-            )
-        )
-    }*//*
-    Glide.with(imgView.context)
-        .load(headerURL)
-        .apply(
-            RequestOptions()
-                .placeholder(R.drawable.loading_animation)
-                .error(R.drawable.ic_broken_image)
-        )
-        .into(imgView)
-}*/
-
-@BindingAdapter("seriesImageUrl")
 fun bindSeriesImage(imgView: ImageView, imgUrl: String?) {
-    val customUrl = GlideUrl(imgUrl)
     Glide.with(imgView.context)
-        .load(customUrl)
+        .load(imgUrl)
         .apply(
             RequestOptions()
                 .placeholder(R.drawable.loading_animation)
                 .error(R.drawable.ic_broken_image)
         )
         .into(imgView)
+
 }
 
 @BindingAdapter("seriesApiStatus")

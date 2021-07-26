@@ -6,6 +6,7 @@ object APIConstants {
     object Endpoints {
         const val SHOWS = "shows"
         const val SEARCH_SHOWS = "search/shows"
+        const val EPISODES = "episodes"
     }
 
     object QueryParams {

@@ -143,5 +143,5 @@ class SeriesListFragment : Fragment() {
     }
     */
 
-    
+
 }

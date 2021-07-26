@@ -5,8 +5,9 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.facundojaton.tvmazechallenge.R
-import com.facundojaton.tvmazechallenge.adapters.EpisodesListAdapter
+import com.facundojaton.tvmazechallenge.adapters.SeasonsListAdapter
 import com.facundojaton.tvmazechallenge.databinding.FragmentSeriesDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SeriesDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentSeriesDetailsBinding
-    private var episodesListAdapter = EpisodesListAdapter()
+    private var seasonsListAdapter = SeasonsListAdapter()
 
     private val seriesDetailsViewModel: SeriesDetailsViewModel by lazy {
         ViewModelProvider(this).get(SeriesDetailsViewModel::class.java)
@@ -30,44 +31,34 @@ class SeriesDetailsFragment : Fragment() {
         seriesDetailsViewModel.setSeries(SeriesDetailsFragmentArgs.fromBundle(args).selectedSeries)
         binding.viewModel = seriesDetailsViewModel
         binding.lifecycleOwner = this
+
         binding.apply {
-            rvSeriesEpisodes.adapter = EpisodesListAdapter()
-            //rvSeriesCast.adapter = castListAdapter
+            rvSeriesSeasons.adapter = seasonsListAdapter
+            seasonsListAdapter.onSeasonEpisodeClicked = { episode ->
+                findNavController().navigate(SeriesDetailsFragmentDirections.actionShowEpisode(episode))
+            }
         }
-        /*castListAdapter.onCharacterClicked = {
-            showActorDialog(it)
-        }*/
-        //Handle Error?
 
         return binding.root
     }
 
-   /* private fun showActorDialog(character: CastCharacter) {
-        context?.let { fragmentContext ->
-            Dialog(fragmentContext).apply {
-                val dialogBinding = CustomDialogCastCharacterBinding.inflate(layoutInflater)
-                requestWindowFeature(Window.FEATURE_NO_TITLE)
-                setContentView(dialogBinding.root)
-                window?.setLayout(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT
-                )
-                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                setCanceledOnTouchOutside(true)
-                dialogBinding.castCharacter = character
-                show()
-            }
-        }
-    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       // if (seriesDetailsViewModel.isCastEmpty) showEmptyCast()
+        /*seriesDetailsViewModel.checkEmptyFields()
         if (seriesDetailsViewModel.episodesListEmpty) showEmptyEpisodes()
+        else showEpisodes()*/
+    }
+
+    private fun showEpisodes() {
+        binding.apply {
+            clEmptyEpisodes.visibility = View.GONE
+            rvSeriesSeasons.visibility = View.VISIBLE
+        }
     }
 
     private fun showEmptyEpisodes() {
         binding.clEmptyEpisodes.visibility = View.VISIBLE
-        binding.rvSeriesEpisodes.visibility = View.GONE
+        binding.rvSeriesSeasons.visibility = View.GONE
     }
 }

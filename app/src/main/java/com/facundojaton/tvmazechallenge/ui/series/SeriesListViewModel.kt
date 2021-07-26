@@ -63,7 +63,6 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
                     withContext(Dispatchers.IO) {
                         val response: List<Series> = repository.getSeries(it)
                         seriesList.addAll(response)
-                        seriesList[1].image
                     }
                 }
                 _status.value = RequestStatus.DONE

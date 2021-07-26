@@ -7,4 +7,7 @@
     <string name="empty_cast">Empty cast</string>
     <string name="episodes">Episodes</string>
     <string name="there_are_no_episodes">This series has no episodes yet</string>
+    <string name="null_season_error">A season value on Episodes array was null</string>
+    <string name="season">Season</string>
+    <string name="episode_name">Episode name</string>
 </resources>

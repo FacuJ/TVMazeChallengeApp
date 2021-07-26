@@ -24,4 +24,7 @@ interface SeriesService {
     @GET("${APIConstants.Endpoints.SHOWS}/{series_id}/episodes")
     suspend fun getShowEpisodesById(@Path(value = "series_id") seriesId: Long) : List<Episode>
 
+    @GET("${APIConstants.Endpoints.EPISODES}/{episode_id}")
+    suspend fun getEpisodeById(@Path(value = "episode_id") episodeId: Long): Episode
+
 }
