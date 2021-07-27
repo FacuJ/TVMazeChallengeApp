@@ -14,4 +14,5 @@ displayed: name, image, number, season, and summary.
 ### Extra:  
 ★ When connection or authentication error happen, movies list can be queried again with a "refresh" button.  
 
-Base URL: https://api.tvmaze.com/
+API Base URL: https://api.tvmaze.com/  
+Distribution folder: https://drive.google.com/file/d/1FhTqICK5ukTT69uXnEbbmuO0D0E-BW8x/view?usp=sharing
