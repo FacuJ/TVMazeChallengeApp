@@ -46,9 +46,9 @@ class SeriesListFragment : Fragment() {
             listAdapter.onSeriesClicked = {
                seriesListViewModel.selectSeries(it)
             }
-            /*btnRefresh.setOnClickListener {
-                seriesListViewModel.sortSeries()
-            }*/
+            btnRefresh.setOnClickListener {
+                seriesListViewModel.refresh()
+            }
         }
 
         seriesListViewModel.status.observe(viewLifecycleOwner, { status ->
@@ -118,30 +118,4 @@ class SeriesListFragment : Fragment() {
         super.onPause()
         binding.etSeriesSearch.removeTextChangedListener(textChangedListener)
     }
-/*
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.overflow_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        moviesListViewModel.sortSeries(
-            when (item.itemId) {
-                R.id.most_popular_menu -> MovieProperties.POPULARITY_DESC
-                R.id.a_to_z_menu -> MovieProperties.TITLE_ASC
-                R.id.z_to_a_menu -> MovieProperties.TITLE_DESC
-                R.id.least_popular_menu -> MovieProperties.POPULARITY_ASC
-                R.id.least_recent_menu -> MovieProperties.DATE_ASC
-                else -> MovieProperties.DATE_DESC
-            }
-        )
-        if (item.itemId == android.R.id.home) {
-            SessionController.apiKey = ""
-            requireActivity().onBackPressed()
-        }
-        return true
-    }
-    */
-
-
 }

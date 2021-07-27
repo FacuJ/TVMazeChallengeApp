@@ -12,14 +12,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:padding="8dp">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_series"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="150dp"
             android:adjustViewBounds="true"
             android:padding="2dp"
             android:scaleType="fitCenter"
@@ -33,16 +33,16 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_series_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="@color/dark_cornflower_blue"
-            android:textSize="15sp"
             android:ellipsize="end"
             android:singleLine="true"
             android:text="@{series.name}"
+            android:textColor="@color/black"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_series"
-            tools:text="@tools:sample/full_names" />
+            tools:text="@string/tool_long_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

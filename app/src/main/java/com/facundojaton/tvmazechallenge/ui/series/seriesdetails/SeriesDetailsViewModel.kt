@@ -48,8 +48,10 @@ class SeriesDetailsViewModel @ViewModelInject constructor(
         val seasonList = ArrayList<Season>()
         for (number in 1..highestSeason){
             val episodesList = ArrayList(selectedSeries.episodes.filter { it.season == number })
-            val season = Season(number, episodesList)
-           seasonList.add(season)
+            if(episodesList.isNotEmpty()) {
+                val season = Season(number, episodesList)
+                seasonList.add(season)
+            }
         }
 
         _seasonsList.value = seasonList

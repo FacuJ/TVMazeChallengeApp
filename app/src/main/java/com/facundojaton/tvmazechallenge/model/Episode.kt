@@ -13,5 +13,5 @@ data class Episode(
     val type: String?,
     val url: String?,
     val image: ImageResponse?,
-    val summary: String
+    val summary: String?
 ) : Parcelable, Serializable

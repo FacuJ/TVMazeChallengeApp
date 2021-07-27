@@ -20,8 +20,8 @@ import kotlinx.coroutines.withContext
 class SeriesListViewModel @ViewModelInject constructor(private val repository: SeriesRepository) :
     ViewModel() {
 
-    private val _seriesList = MutableLiveData<List<Series>>()
-    val seriesList: LiveData<List<Series>>
+    private val _seriesList = MutableLiveData<ArrayList<Series>>()
+    val seriesList: LiveData<ArrayList<Series>>
         get() = _seriesList
 
     private val _status = MutableLiveData<RequestStatus>()
@@ -38,19 +38,12 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
 
     var isSearching: Boolean = false
     private var isScrolling: Boolean
-    private var isLoading: Boolean
     private var page: Int
-    private var searchPage: Int
-
 
     init {
-        isScrolling = false
-        isLoading = false
-        searchPage = 1
         page = 1
-        _queryParams.value = HashMap()
-        resetPages()
-        getSeriesList()
+        isScrolling = false
+        refresh()
     }
 
     private fun getSeriesList() = viewModelScope.launch {
@@ -64,8 +57,12 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
                         seriesList.addAll(response)
                     }
                 }
+
+                val newList = ArrayList<Series>()
+                if(!_seriesList.value.isNullOrEmpty()) newList.addAll(_seriesList.value!!)
+                newList.addAll(seriesList)
+                _seriesList.value = newList
                 _status.value = RequestStatus.DONE
-                _seriesList.value = seriesList
             } catch (e: Exception) {
                 _status.value = RequestStatus.ERROR
                 Log.e(SeriesListViewModel::class.java.simpleName, e.message.toString())
@@ -116,8 +113,7 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
     ) {
         val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
         val isNotAtBeginning = firstVisibleItemPosition >= 0
-        val shouldPaginate =
-            !isLoading && isAtLastItem &&
+        val shouldPaginate = (status.value != RequestStatus.LOADING) && isAtLastItem &&
                     isNotAtBeginning && isScrolling && !isSearching
         if (shouldPaginate) {
             getMoreSeries()
@@ -155,6 +151,12 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
 
     fun navigateToDetailsFinished() {
         _selectedSeries.value = null
+    }
+
+    fun refresh() {
+        _queryParams.value = HashMap()
+        resetPages()
+        getSeriesList()
     }
 
 }
