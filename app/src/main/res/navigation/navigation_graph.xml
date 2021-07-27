@@ -15,7 +15,11 @@
             app:argType="string" />
         <action
             android:id="@+id/action_showDetail"
-            app:destination="@id/seriesDetailFragment" />
+            app:destination="@id/seriesDetailFragment"
+            app:enterAnim="@anim/enter_from_right"
+            app:popExitAnim="@anim/exit_to_right"
+            app:exitAnim="@anim/exit_to_left"
+            app:popEnterAnim="@anim/enter_from_left"/>
     </fragment>
 
     <fragment
@@ -28,7 +32,11 @@
             app:argType="com.facundojaton.tvmazechallenge.model.SeriesDetail" />
         <action
             android:id="@+id/action_showEpisode"
-            app:destination="@id/episodeFragment" />
+            app:destination="@id/episodeFragment"
+            app:enterAnim="@anim/enter_from_bottom"
+            app:popExitAnim="@anim/exit_to_bottom"
+            app:exitAnim="@anim/exit_to_top"
+            app:popEnterAnim="@anim/enter_from_top"/>
     </fragment>
 
     <fragment
