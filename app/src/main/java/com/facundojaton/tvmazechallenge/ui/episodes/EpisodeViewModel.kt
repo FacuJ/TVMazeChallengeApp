@@ -1,10 +1,12 @@
 package com.facundojaton.tvmazechallenge.ui.episodes
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.facundojaton.tvmazechallenge.RequestStatus
 import com.facundojaton.tvmazechallenge.model.Episode
 
-class EpisodeViewModel: ViewModel() {
+class EpisodeViewModel : ViewModel() {
 
     private val _episode = MutableLiveData<Episode>()
     val episode: LiveData<Episode>

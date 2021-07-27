@@ -15,15 +15,15 @@
         android:id="@+id/ll_episode"
         android:layout_width="144dp"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="8dp"
         android:background="@color/dark_cornflower_blue"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp">
 
         <androidx.cardview.widget.CardView
             android:layout_width="128dp"
             android:layout_height="72dp"
-            app:cardCornerRadius="7dp"
             android:background="@color/dark_cornflower_blue"
+            app:cardCornerRadius="7dp"
             app:cardElevation="5dp">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -44,10 +44,10 @@
             android:layout_marginTop="5dp"
             android:ellipsize="end"
             android:singleLine="true"
-            android:textAlignment="center"
-            tools:text="@string/tool_long_text"
             android:text="@{@string/episode_formatted(episode.number, episode.name)}"
+            android:textAlignment="center"
             android:textColor="#C4DFEF"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            tools:text="@string/tool_long_text" />
     </LinearLayout>
 </layout>

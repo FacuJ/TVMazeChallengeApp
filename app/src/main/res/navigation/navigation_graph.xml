@@ -5,16 +5,6 @@
     android:id="@+id/navigation_graph"
     app:startDestination="@id/seriesListFragment">
 
-   <!-- <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.facundojaton..login.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_login"
-            app:destination="@id/seriesListFragment" />
-    </fragment>-->
-
     <fragment
         android:id="@+id/seriesListFragment"
         android:name="com.facundojaton.tvmazechallenge.ui.series.SeriesListFragment"
@@ -28,7 +18,7 @@
             app:destination="@id/seriesDetailFragment" />
     </fragment>
 
-   <fragment
+    <fragment
         android:id="@+id/seriesDetailFragment"
         android:name="com.facundojaton.tvmazechallenge.ui.series.seriesdetails.SeriesDetailsFragment"
         android:label="Series details"
@@ -36,9 +26,9 @@
         <argument
             android:name="selectedSeries"
             app:argType="com.facundojaton.tvmazechallenge.model.SeriesDetail" />
-       <action
-           android:id="@+id/action_showEpisode"
-           app:destination="@id/episodeFragment" />
+        <action
+            android:id="@+id/action_showEpisode"
+            app:destination="@id/episodeFragment" />
     </fragment>
 
     <fragment

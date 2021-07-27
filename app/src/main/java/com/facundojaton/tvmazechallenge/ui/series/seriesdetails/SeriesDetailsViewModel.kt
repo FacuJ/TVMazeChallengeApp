@@ -1,21 +1,14 @@
 package com.facundojaton.tvmazechallenge.ui.series.seriesdetails
 
 import android.util.Log
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.facundojaton.tvmazechallenge.R
 import com.facundojaton.tvmazechallenge.RequestStatus
-import com.facundojaton.tvmazechallenge.model.Episode
 import com.facundojaton.tvmazechallenge.model.Season
 import com.facundojaton.tvmazechallenge.model.SeriesDetail
-import com.facundojaton.tvmazechallenge.repository.SeriesRepository
-import java.lang.Exception
 
-class SeriesDetailsViewModel @ViewModelInject constructor(
-    private val repository: SeriesRepository
-) : ViewModel() {
+class SeriesDetailsViewModel : ViewModel() {
 
     var episodesListEmpty: Boolean = true
 
@@ -46,9 +39,9 @@ class SeriesDetailsViewModel @ViewModelInject constructor(
         }
 
         val seasonList = ArrayList<Season>()
-        for (number in 1..highestSeason){
+        for (number in 1..highestSeason) {
             val episodesList = ArrayList(selectedSeries.episodes.filter { it.season == number })
-            if(episodesList.isNotEmpty()) {
+            if (episodesList.isNotEmpty()) {
                 val season = Season(number, episodesList)
                 seasonList.add(season)
             }

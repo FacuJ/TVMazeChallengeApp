@@ -61,20 +61,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:htmlTextFormat="@{viewModel.seriesDetail.series.summary}"
                 android:textColor="#de000000"
                 android:textSize="18sp"
+                app:htmlTextFormat="@{viewModel.seriesDetail.series.summary}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_series_time"
                 tools:text="@tools:sample/lorem" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_series_days"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:id="@+id/cl_series_days"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_series_description" >
+                app:layout_constraintTop_toBottomOf="@+id/tv_series_description">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_series_days"
@@ -85,34 +85,32 @@
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                   />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_series_days"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
-                    tools:listitem="@layout/layout_day_item"
+                    android:orientation="horizontal"
                     app:daysArray="@{viewModel.seriesDetail.series.schedule.days}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_series_days"
                     app:layout_constraintTop_toTopOf="parent"
-                    />
+                    tools:listitem="@layout/layout_day_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_series_genres"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                android:id="@+id/cl_series_genres"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cl_series_days" >
+                app:layout_constraintTop_toBottomOf="@+id/cl_series_days">
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_series_genres_label"
@@ -123,24 +121,22 @@
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_genres"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp"
-                    tools:listitem="@layout/layout_genre_item"
+                    android:orientation="horizontal"
                     app:genresArray="@{viewModel.seriesDetail.series.genres}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_series_genres_label"
                     app:layout_constraintTop_toTopOf="parent"
-                    />
+                    tools:listitem="@layout/layout_genre_item" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

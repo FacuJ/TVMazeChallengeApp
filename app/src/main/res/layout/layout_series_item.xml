@@ -22,13 +22,13 @@
             android:layout_height="150dp"
             android:adjustViewBounds="true"
             android:padding="2dp"
-            android:scaleType="fitCenter"
             android:paddingBottom="4dp"
+            android:scaleType="fitCenter"
+            app:imageUrl="@{series.image.medium}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/backgrounds/scenic"
-            app:imageUrl="@{series.image.medium}"/>
+            tools:src="@tools:sample/backgrounds/scenic" />
 
 
         <androidx.appcompat.widget.AppCompatTextView

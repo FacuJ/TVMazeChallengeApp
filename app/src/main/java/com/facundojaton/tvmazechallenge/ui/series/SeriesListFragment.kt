@@ -2,9 +2,12 @@ package com.facundojaton.tvmazechallenge.ui.series
 
 import android.os.Bundle
 import android.text.TextWatcher
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -28,7 +31,7 @@ class SeriesListFragment : Fragment() {
     }
     private lateinit var binding: FragmentSeriesListBinding
     private var listAdapter = SeriesListAdapter()
-    private var textChangedListener : TextWatcher? = null
+    private var textChangedListener: TextWatcher? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +47,7 @@ class SeriesListFragment : Fragment() {
             rvSeries.adapter = listAdapter
             rvSeries.addOnScrollListener(customScrollListener)
             listAdapter.onSeriesClicked = {
-               seriesListViewModel.selectSeries(it)
+                seriesListViewModel.selectSeries(it)
             }
             btnRefresh.setOnClickListener {
                 seriesListViewModel.refresh()
@@ -70,11 +73,25 @@ class SeriesListFragment : Fragment() {
             }
         })
 
-        seriesListViewModel.selectedSeries.observe(viewLifecycleOwner, { detail->
+        seriesListViewModel.selectedSeries.observe(viewLifecycleOwner, { detail ->
             detail?.let {
                 navigateToSeriesDetail(it)
             }
         })
+
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (binding.etSeriesSearch.text?.isNotBlank() == true) binding.etSeriesSearch.setText(
+                        ""
+                    )
+                    else {
+                        this.remove()
+                        requireActivity().onBackPressed()
+                    }
+                }
+            })
 
         return binding.root
     }
@@ -102,7 +119,7 @@ class SeriesListFragment : Fragment() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
             super.onScrollStateChanged(recyclerView, newState)
             if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-               seriesListViewModel.onScrollStateTrue()
+                seriesListViewModel.onScrollStateTrue()
             }
         }
     }
@@ -118,4 +135,6 @@ class SeriesListFragment : Fragment() {
         super.onPause()
         binding.etSeriesSearch.removeTextChangedListener(textChangedListener)
     }
+
+
 }

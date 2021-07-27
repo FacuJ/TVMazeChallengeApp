@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.facundojaton.tvmazechallenge.ui.episodes.EpisodeViewModel"/>
+            type="com.facundojaton.tvmazechallenge.ui.episodes.EpisodeViewModel" />
     </data>
 
     <ScrollView
@@ -50,9 +50,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:htmlTextFormat="@{viewModel.episode.summary}"
                 android:textColor="#de000000"
                 android:textSize="20sp"
+                app:htmlTextFormat="@{viewModel.episode.summary}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_episode_number_season"
                 tools:text="@tools:sample/lorem" />

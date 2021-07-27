@@ -91,8 +91,8 @@ fun bindStatus(progressBar: ProgressBar, status: RequestStatus?) {
 }
 
 @BindingAdapter("htmlTextFormat")
-fun bindHtmlText(textView : TextView?, htmlText : String){
-    textView?.text = htmlTextToString(htmlText)
+fun bindHtmlText(textView : TextView?, htmlText : String?){
+    textView?.text = htmlText?.let { htmlTextToString(it) }
 }
 
 @BindingAdapter("refreshSeriesVisibility")

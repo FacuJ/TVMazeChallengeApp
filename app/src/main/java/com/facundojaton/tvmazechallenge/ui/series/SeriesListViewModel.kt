@@ -28,21 +28,16 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
     val status: LiveData<RequestStatus>
         get() = _status
 
-    private val _queryParams = MutableLiveData<HashMap<String, String>>()
-    val queryParams: LiveData<HashMap<String, String>>
-        get() = _queryParams
-
     private val _selectedSeries = MutableLiveData<SeriesDetail>()
     val selectedSeries: LiveData<SeriesDetail>
         get() = _selectedSeries
 
     var isSearching: Boolean = false
-    private var isScrolling: Boolean
-    private var page: Int
+    private val queryParams = HashMap<String, String>()
+    private var isScrolling: Boolean = false
+    private var page: Int = 1
 
     init {
-        page = 1
-        isScrolling = false
         refresh()
     }
 
@@ -51,15 +46,13 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
             try {
                 _status.value = RequestStatus.LOADING
                 val seriesList = ArrayList<Series>()
-                queryParams.value?.let {
-                    withContext(Dispatchers.IO) {
-                        val response: List<Series> = repository.getSeries(it)
-                        seriesList.addAll(response)
-                    }
+                withContext(Dispatchers.IO) {
+                    val response: List<Series> = repository.getSeries(queryParams)
+                    seriesList.addAll(response)
                 }
 
                 val newList = ArrayList<Series>()
-                if(!_seriesList.value.isNullOrEmpty()) newList.addAll(_seriesList.value!!)
+                if (!_seriesList.value.isNullOrEmpty()) newList.addAll(_seriesList.value!!)
                 newList.addAll(seriesList)
                 _seriesList.value = newList
                 _status.value = RequestStatus.DONE
@@ -75,10 +68,9 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
         if (name.isNotBlank()) {
             isSearching = true
             getSeriesListByName(name)
-        }
-        else {
+        } else {
             isSearching = false
-            queryParams.value?.let { getSeriesList() }
+            getSeriesList()
         }
     }
 
@@ -103,7 +95,7 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
     private fun resetPages() {
         _seriesList.value = ArrayList()
         page = 1
-        _queryParams.value?.set(APIConstants.QueryParams.PAGE, page.toString())
+        queryParams[APIConstants.QueryParams.PAGE] = page.toString()
     }
 
     fun paginateIfNeeded(
@@ -114,7 +106,7 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
         val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
         val isNotAtBeginning = firstVisibleItemPosition >= 0
         val shouldPaginate = (status.value != RequestStatus.LOADING) && isAtLastItem &&
-                    isNotAtBeginning && isScrolling && !isSearching
+                isNotAtBeginning && isScrolling && !isSearching
         if (shouldPaginate) {
             getMoreSeries()
             isScrolling = false
@@ -124,7 +116,7 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
 
     private fun getMoreSeries() {
         page++
-        _queryParams.value?.set(APIConstants.QueryParams.PAGE, page.toString())
+        queryParams[APIConstants.QueryParams.PAGE] = page.toString()
         getSeriesList()
     }
 
@@ -154,7 +146,7 @@ class SeriesListViewModel @ViewModelInject constructor(private val repository: S
     }
 
     fun refresh() {
-        _queryParams.value = HashMap()
+        queryParams.clear()
         resetPages()
         getSeriesList()
     }

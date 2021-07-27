@@ -1,14 +1,14 @@
 package com.facundojaton.tvmazechallenge.ui.episodes
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.facundojaton.tvmazechallenge.R
-import com.facundojaton.tvmazechallenge.adapters.EpisodesListAdapter
 import com.facundojaton.tvmazechallenge.databinding.FragmentEpisodeBinding
-import com.facundojaton.tvmazechallenge.databinding.FragmentSeriesDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,22 +34,4 @@ class EpisodeFragment : Fragment() {
 
         return binding.root
     }
-
-   /* private fun showActorDialog(character: CastCharacter) {
-        context?.let { fragmentContext ->
-            Dialog(fragmentContext).apply {
-                val dialogBinding = CustomDialogCastCharacterBinding.inflate(layoutInflater)
-                requestWindowFeature(Window.FEATURE_NO_TITLE)
-                setContentView(dialogBinding.root)
-                window?.setLayout(
-                    WindowManager.LayoutParams.MATCH_PARENT,
-                    WindowManager.LayoutParams.WRAP_CONTENT
-                )
-                window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                setCanceledOnTouchOutside(true)
-                dialogBinding.castCharacter = character
-                show()
-            }
-        }
-    }*/
 }

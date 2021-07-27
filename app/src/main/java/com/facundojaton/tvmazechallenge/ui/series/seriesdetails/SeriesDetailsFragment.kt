@@ -1,7 +1,9 @@
 package com.facundojaton.tvmazechallenge.ui.series.seriesdetails
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -39,7 +41,11 @@ class SeriesDetailsFragment : Fragment() {
             rvGenres.adapter = GenresListAdapter()
             rvSeriesDays.adapter = DaysListAdapter()
             seasonsListAdapter.onSeasonEpisodeClicked = { episode ->
-                findNavController().navigate(SeriesDetailsFragmentDirections.actionShowEpisode(episode))
+                findNavController().navigate(
+                    SeriesDetailsFragmentDirections.actionShowEpisode(
+                        episode
+                    )
+                )
             }
         }
 

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.facundojaton.tvmazechallenge.databinding.LayoutEpisodeItemBinding
 import com.facundojaton.tvmazechallenge.model.Episode
-import com.facundojaton.tvmazechallenge.model.Series
 
 class EpisodesListAdapter : ListAdapter<
         Episode,
