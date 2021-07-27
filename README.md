@@ -11,6 +11,28 @@ displayed: name, image, days, time, genres, summary and a list of episodes group
 displayed: name, image, number, season, and summary.  
 ★ The catalog is paged: when scrolling reaches the end, more series are fetched.  
 
+### Screenshots - Light mode
+
+<hr/>
+<p align="center">
+<img src="pictures/NM_1_framed.png" alt="Screenshot1" width="200"/>
+<img style="margin-left: 30px" src="pictures/NM_2_framed.png" alt="Screenshot2" width="200"/>
+<img style="margin-left: 30px" src="pictures/NM_3_framed.png" alt="Screenshot3" width="200"/>
+ <img style="margin-left: 30px" src="pictures/NM_4_framed.png" alt="Screenshot4" width="200"/>
+</p>
+<hr/>
+
+### Screenshots - Dark mode
+
+<hr/>
+<p align="center">
+<img src="pictures/DM_1_framed.png" alt="Screenshot5" width="200"/>
+<img style="margin-left: 30px" src="pictures/DM_2_framed.png" alt="Screenshot6" width="200"/>
+<img style="margin-left: 30px" src="pictures/DM_3_framed.png" alt="Screenshot7" width="200"/>
+ <img style="margin-left: 30px" src="pictures/DM_4_framed.png" alt="Screenshot8" width="200"/>
+</p>
+<hr/>
+
 ### Extra:  
 ★ When connection or authentication error happen, movies list can be queried again with a "refresh" button.  
 
