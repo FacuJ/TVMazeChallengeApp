@@ -4,7 +4,7 @@ Series browser with name, image, summary, seasons and episodes provided by an ex
 ## Features
 ★ This app is fully developed in Kotlin.    
 ★ Main page that shows a list of shows.
-★ Shows can be queried by name  
+★ Shows can be queried by name.  
 ★ Each show is clickable and opens a second screen where the complete series information is
 displayed: name, image, days, time, genres, summary and a list of episodes grouped by season.  
 ★ Each episode is clickable and opens another screen where the complete episode information is
