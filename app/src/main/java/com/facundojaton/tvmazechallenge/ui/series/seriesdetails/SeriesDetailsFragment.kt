@@ -49,9 +49,10 @@ class SeriesDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*seriesDetailsViewModel.checkEmptyFields()
+        seriesDetailsViewModel.checkEmptyFields()
         if (seriesDetailsViewModel.episodesListEmpty) showEmptyEpisodes()
-        else showEpisodes()*/
+        else showEpisodes()
+
     }
 
     private fun showEpisodes() {
