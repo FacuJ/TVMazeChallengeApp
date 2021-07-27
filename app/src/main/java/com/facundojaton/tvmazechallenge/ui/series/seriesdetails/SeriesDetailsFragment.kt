@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.facundojaton.tvmazechallenge.R
+import com.facundojaton.tvmazechallenge.adapters.DaysListAdapter
+import com.facundojaton.tvmazechallenge.adapters.GenresListAdapter
 import com.facundojaton.tvmazechallenge.adapters.SeasonsListAdapter
 import com.facundojaton.tvmazechallenge.databinding.FragmentSeriesDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,6 +36,8 @@ class SeriesDetailsFragment : Fragment() {
 
         binding.apply {
             rvSeriesSeasons.adapter = seasonsListAdapter
+            rvGenres.adapter = GenresListAdapter()
+            rvSeriesDays.adapter = DaysListAdapter()
             seasonsListAdapter.onSeasonEpisodeClicked = { episode ->
                 findNavController().navigate(SeriesDetailsFragmentDirections.actionShowEpisode(episode))
             }

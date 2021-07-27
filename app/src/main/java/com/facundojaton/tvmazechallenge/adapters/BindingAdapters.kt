@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,6 +15,7 @@ import com.facundojaton.tvmazechallenge.RequestStatus
 import com.facundojaton.tvmazechallenge.model.Episode
 import com.facundojaton.tvmazechallenge.model.Season
 import com.facundojaton.tvmazechallenge.model.Series
+import com.facundojaton.tvmazechallenge.utils.htmlTextToString
 
 @BindingAdapter("seriesList")
 fun bindSeriesRecyclerView(
@@ -30,6 +32,24 @@ fun bindEpisodesRecyclerView(
     data: List<Episode>?
 ) {
     val adapter = episodesRecyclerView.adapter as EpisodesListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("daysArray")
+fun bindDaysRecyclerView(
+    daysRecyclerView: RecyclerView,
+    data: ArrayList<String>?
+) {
+    val adapter = daysRecyclerView.adapter as DaysListAdapter
+    adapter.submitList(data)
+}
+
+@BindingAdapter("genresArray")
+fun bindGenresRecyclerView(
+    genresRecyclerView: RecyclerView,
+    data: ArrayList<String>?
+) {
+    val adapter = genresRecyclerView.adapter as GenresListAdapter
     adapter.submitList(data)
 }
 
@@ -68,6 +88,11 @@ fun bindStatus(progressBar: ProgressBar, status: RequestStatus?) {
             progressBar.visibility = View.GONE
         }
     }
+}
+
+@BindingAdapter("htmlTextFormat")
+fun bindHtmlText(textView : TextView?, htmlText : String){
+    textView?.text = htmlTextToString(htmlText)
 }
 
 @BindingAdapter("refreshSeriesVisibility")

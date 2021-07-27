@@ -44,11 +44,11 @@
                 tools:text="@tools:sample/full_names" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_series_tagline"
+                android:id="@+id/tv_series_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{viewModel.seriesDetail.series.id.toString()}"
+                android:text="@{viewModel.seriesDetail.series.schedule.time}"
                 android:textColor="@color/light_blue_grey_500"
                 android:textSize="15sp"
                 android:textStyle="italic"
@@ -61,36 +61,88 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@{viewModel.seriesDetail.series.summary}"
+                app:htmlTextFormat="@{viewModel.seriesDetail.series.summary}"
                 android:textColor="#de000000"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_series_tagline"
+                app:layout_constraintTop_toBottomOf="@+id/tv_series_time"
                 tools:text="@tools:sample/lorem" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_series_release_date"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@{viewModel.seriesDetail.series.language}"
-                android:textColor="#de000000"
-                android:textSize="18sp"
+                android:padding="4dp"
+                android:id="@+id/cl_series_days"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_series_description"
-                tools:text="@tools:sample/date/mmddyy" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_series_description" >
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_series_status"
-                android:layout_width="wrap_content"
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_series_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/days"
+                    android:textColor="#de000000"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                   />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_series_days"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    tools:listitem="@layout/layout_day_item"
+                    app:daysArray="@{viewModel.seriesDetail.series.schedule.days}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_series_days"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{viewModel.seriesDetail.series.type}"
-                android:textColor="#de000000"
-                android:textSize="18sp"
+                android:padding="4dp"
+                android:id="@+id/cl_series_genres"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_series_release_date"
-                tools:text="@string/type" />
+                app:layout_constraintTop_toBottomOf="@+id/cl_series_days" >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_series_genres_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/genres"
+                    android:textColor="#de000000"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_genres"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    tools:listitem="@layout/layout_genre_item"
+                    app:genresArray="@{viewModel.seriesDetail.series.genres}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_series_genres_label"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_series_seasons_and_episodes"
@@ -102,7 +154,7 @@
                 android:textSize="25sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_series_status" />
+                app:layout_constraintTop_toBottomOf="@+id/cl_series_genres" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_empty_episodes"

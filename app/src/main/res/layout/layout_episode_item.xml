@@ -46,7 +46,7 @@
             android:singleLine="true"
             android:textAlignment="center"
             tools:text="@string/tool_long_text"
-            android:text="@{episode.name}"
+            android:text="@{@string/episode_formatted(episode.number, episode.name)}"
             android:textColor="#C4DFEF"
             android:textSize="12sp" />
     </LinearLayout>
